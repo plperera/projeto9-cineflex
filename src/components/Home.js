@@ -45,7 +45,7 @@ export default function Home(){
                 </div>
 
             </Cards>
-            
+
         </Container>
     )
 }
@@ -72,8 +72,6 @@ const Cards = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
     grid-row-gap: 10px;
-
-
 
 img {
     width: 129px;
