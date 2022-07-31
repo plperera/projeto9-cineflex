@@ -42,8 +42,24 @@ export default function Assentos(){
                     <>Carregando...</>
                 )}
                 
-
             </ContainerAssentos> 
+
+            <Exemplo>
+                <Selecionado>
+                    <div></div>
+                    <h5>Selecionado</h5>
+                </Selecionado>
+
+                <Disponivel>
+                    <div></div>
+                    <h5>Disponível</h5>
+                </Disponivel>
+
+                <Indisponivel>
+                    <div></div>
+                    <h5>Indisponível</h5>
+                </Indisponivel>
+            </Exemplo>
             
         </Container>
     )
@@ -69,7 +85,51 @@ const ContainerAssentos = styled.div`
 
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 7px;
-    grid-row-gap: 15px;
-    
+    grid-row-gap: 15px;   
+
+`
+const Selecionado = styled.div`
+    background: #8DD7CF;
+    border: 1px solid #1AAE9E;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+`
+const Disponivel = styled.div`
+    background: #C3CFD9;
+    border: 1px solid #7B8B99;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+`
+const Indisponivel = styled.div`
+    background: #FBE192;
+    border: 1px solid #F7C52B;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+`
+const Exemplo = styled.div`
+
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+
+    width:100%;
+    margin-top:25px;
+
+    h5{
+        font-size: 13px;
+        color: #4E5A65;
+        margin-top: 60px;
+    }
+
+    div{
+        box-sizing: border-box;
+        border-radius: 17px;
+
+        width: 24px;
+        height: 24px;
+    }
 
 `

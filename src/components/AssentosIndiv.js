@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useState } from 'react';
 
 
-export default function AssentosIndiv({name, isAvailable, id}){
+export default function AssentosIndiv({name, isAvailable, id, selecionados, setSelecionados}){
   
     const [click, setClick] = useState(false)
 
@@ -10,21 +10,30 @@ export default function AssentosIndiv({name, isAvailable, id}){
         if (isAvailable === true && click === false) return "#C3CFD9"
         else if (isAvailable === true && click === true) return "#8DD7CF"
     }
+    
     function verificaBorder (){
         if (isAvailable === true && click === false) return "#B8B99"
         else if (isAvailable === true && click === true) return "#1AAE9E"
     }
-    console.log("teste")
+    function clicou (id, name){
+        setClick(!click)
+ 
+        if (selecionados.filter((arr) => arr === name).length !== 0){
+            setSelecionados(selecionados.filter((arr) => arr !== name))
+        } else {setSelecionados([...selecionados, name])}
+        
+    }
+    
     return(            
         <>        
-                <Card 
+            <Card 
 
-                    key = {id} 
-                    color = {isAvailable ? (verificaColor(isAvailable,click)):("#FBE192")}
-                    borderColor= {isAvailable ? (verificaBorder(isAvailable,click)):("#FBE192")}
-                    onClick={ () => setClick(!click)}
+                key = {id} 
+                color = {isAvailable ? (verificaColor(isAvailable,click)):("#FBE192")}
+                borderColor= {isAvailable ? (verificaBorder(isAvailable,click)):("#FBE192")}
+                onClick={ () => clicou(id, name)}
                     
-                >{name}</Card>
+            >{name}</Card>
         </> 
     )
 }
