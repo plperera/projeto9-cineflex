@@ -5,7 +5,7 @@ export default function Home(){
         <>     
             <Link to ="/horario">
                 <div>
-                    OI
+                    
                 </div>
             </Link>
         </>

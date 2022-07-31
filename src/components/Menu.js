@@ -1,7 +1,26 @@
+import styled from "styled-components"
+
 export default function Menu () {
     return(
-        <div>
+        <MenuComponent>
             <span>CINEFLEX</span>
-        </div>
+        </MenuComponent>
     )
 }
+
+const MenuComponent = styled.div`
+
+background-color: #C3CFD9;
+color: #E8833A;
+font-size: 34px;
+
+width: 100%;
+height: 67px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+position:fixed;
+
+`
