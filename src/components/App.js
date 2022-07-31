@@ -17,7 +17,7 @@ export default function App () {
 
                 <Route path="/" element={<Home />}/>
 
-                <Route path="/horario/:filmeId" element={<Horario />}/>
+                <Route path="/sessoes/:filmeId" element={<Horario />}/>
                 
             </Routes>
             

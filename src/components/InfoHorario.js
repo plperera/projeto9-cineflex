@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 export default function InfoHorario({obj}){
 
     return(
@@ -11,7 +12,11 @@ export default function InfoHorario({obj}){
                 <div>
                     {
                     array.showtimes.map((arr)=> 
+                    
+                    <StyledLink to={`/assentos/${arr.id}`}>
                     <ButtonTime key={arr.id}> {arr.name} </ButtonTime>
+                    </StyledLink>
+
                     )}
                 </div>
 
@@ -68,5 +73,12 @@ const ButtonTime = styled.div`
     display: flex !important;
     align-items: center;
     justify-content:center;
-    
+
+`
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+}
 `

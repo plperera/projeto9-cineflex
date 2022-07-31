@@ -11,7 +11,7 @@ export default function BannerFilme ({array}) {
             
             array.map((array, indice) => 
 
-                <Link to={`/horario/${array.id}`}>
+                <Link to={`/sessoes/${array.id}`}>
                     <div>
                         <img 
                         src = {array.posterURL} 
