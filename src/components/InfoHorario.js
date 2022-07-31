@@ -1,24 +1,30 @@
 import styled from 'styled-components'
-export default function InfoHorario(){
+export default function InfoHorario({obj}){
 
     return(
 
-        <Container>
+        obj.days.map((array, indice) => 
+            <Container key={indice}>
 
-            <h3>Quinta-feira - 24/06/2021</h3>
+                <h3>{array.weekday} - {array.date}</h3>
 
-            <div>
-                <ButtonTime>
-                    15:00 
-                </ButtonTime>
+                <div>
+                    {
+                    array.showtimes.map((arr)=> 
+                    <ButtonTime key={arr.id}> {arr.name} </ButtonTime>
+                    )}
+                </div>
 
-                <ButtonTime>
-                    15:00
-                </ButtonTime>
-            </div>
+            </Container>
+        )
 
-        </Container>
 
+                // <ButtonTime>
+                //     15:00
+                // </ButtonTime>
+
+
+        
     )
 }
 const Container = styled.div`
@@ -44,7 +50,7 @@ const Container = styled.div`
         grid-template-columns: 1fr 1fr 4fr;
         grid-column-gap: 12px;
 
-        margin: 22px 0;
+        margin: 6px 0 12px 0;
     }
 
 `

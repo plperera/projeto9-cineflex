@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
+import BannerFilme from './BannerFilme'
+
 export default function Home(){
 
-    const teste = [
-        {
-            id: 1,
-            title: "2067",
-            posterURL: "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
-            overview: "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
-            releaseDate: "2020-10-01T00:00:00.000Z",
-        },
-    ]
+    const [filmes, setFilmes] = useState([])
+
+    
+ 
+    useEffect (() =>{
+
+        const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies")
+        promise.then( request => setFilmes(request.data))
+
+    }, [])
 
     return(
 
@@ -20,31 +26,17 @@ export default function Home(){
 
             <Cards>
 
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
+                {filmes.length > 0 ? (
 
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
+                    <BannerFilme array= {filmes}/>
 
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
-
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
-
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
-
-                <div>
-                    <img src = "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"/>
-                </div>
+                ):(
+                    <div> Carregando...</div>
+                )}
+                
 
             </Cards>
+           
 
         </Container>
     )
