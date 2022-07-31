@@ -2,11 +2,15 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
+import AssentosIndiv from './AssentosIndiv';
+
 
 export default function Assentos(){
 
     const params = useParams();
     const [assentos, setAssentos] = useState(undefined)
+    const [selecionados, setSelecionados] = useState([])
+    
 
     useEffect (() =>{
 
@@ -24,11 +28,22 @@ export default function Assentos(){
             
             <ContainerAssentos>
 
-                {assentos.seats.map((arr) => (
-                    <div>{arr.name}</div>
-                ))}
+                {assentos ? (
+                    
+                    assentos.seats.map((arr) => <AssentosIndiv 
+                            name={arr.name} 
+                            isAvailable={arr.isAvailable} 
+                            id={arr.id}
+                            selecionados={selecionados}
+                            setSelecionados={setSelecionados}
+                        /> )
+                    
+                ):(
+                    <>Carregando...</>
+                )}
+                
 
-            </ContainerAssentos>
+            </ContainerAssentos> 
             
         </Container>
     )
@@ -56,22 +71,5 @@ const ContainerAssentos = styled.div`
     grid-column-gap: 7px;
     grid-row-gap: 15px;
     
-    div {
-
-        font-size: 11px;
-
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-
-        width: 26px;
-        height: 26px; 
-        border-radius: 12px;
-
-        background-color: #C3CFD9;
-        border: 1px solid #808F9D;
-
-    }
 
 `
