@@ -8,13 +8,11 @@ import BannerFilme from './BannerFilme'
 export default function Home(){
 
     const [filmes, setFilmes] = useState([])
-
-    
  
     useEffect (() =>{
 
         const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies")
-        promise.then( request => setFilmes(request.data))
+        promise.then( request => setFilmes(request.data))        
 
     }, [])
 

@@ -5,7 +5,7 @@ import axios from 'axios'
 import InfoHorario from './InfoHorario'
 import { useState, useEffect } from 'react';
 
-export default function Horario(){
+export default function Horario({footer, setFooter,info, setInfo, info2, setInfo2}){
 
     const params = useParams();
     const [horarios, setHorarios] = useState(undefined);
@@ -18,6 +18,7 @@ export default function Horario(){
                
             setHorarios (promise.data)
         } )
+        setFooter(!footer)
 
     }, [])
 
@@ -29,7 +30,8 @@ export default function Horario(){
             <h2>Selecione o horário</h2>
             
             {horarios ?(
-                <InfoHorario obj = {horarios}/>
+                <InfoHorario obj = {horarios} info={info} setInfo={setInfo} info2={info2} setInfo2={setInfo2}/>
+                
             ):(
                 <div>Carregando...</div>
             )}

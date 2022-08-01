@@ -20,7 +20,7 @@ export default function AssentosIndiv({name, isAvailable, id, selecionados, setS
  
         if (selecionados.filter((arr) => arr === name).length !== 0){
             setSelecionados(selecionados.filter((arr) => arr !== name))
-        } else {setSelecionados([...selecionados, name])}
+        } else if (isAvailable === true){setSelecionados([...selecionados, name])}
         
     }
     

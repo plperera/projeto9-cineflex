@@ -1,9 +1,19 @@
 import styled from "styled-components"
-export default function Footer(){
+import { useState } from 'react'
+
+export default function Footer({footer, setFooter, footer2, setFooter2, info, setInfo, info2, setInfo2}){
+
+    let display = footer ? ("flex"):("none")
+
 
     return(
-        <FooterComponent>
-        sou um footer
+        <FooterComponent display={display}>
+            <Imagem><img src={info[1]}/></Imagem> 
+            <div>
+                <p>{info[0]}</p>
+                {footer2 ? (<p>{info2[0]} - {info2[3]}</p>):("")}
+            </div>
+            
         </FooterComponent>
     )
 }
@@ -17,16 +27,40 @@ const FooterComponent = styled.div`
     width: 100%;
     height: 117px;
 
-    display: flex;
+    display: ${(props) => props.display};
+    flex-direction:row;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 
     position:fixed;
     bottom: 0;
 
-    display: none;
+    
+    p {
+        height: 40px;
+        font-size: 26px;
+        color: #293845;
+        margin-left: 14px;
+    }
+`
+const Imagem = styled.div`
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width: 64px;
+    height: 89px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+
+    margin-left: 10px;
 
     img {
-
+        width: 48px;
+        height: 72px;
+        
     }
 `

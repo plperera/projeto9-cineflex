@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-export default function InfoHorario({obj}){
+import { useEffect } from 'react';
+export default function InfoHorario({obj, info, setInfo,info2, setInfo2}){
+
+    useEffect (() => {
+
+        setInfo([...info, obj.title, obj.posterURL])
+
+    }, [obj])
+    
 
     return(
 
@@ -13,8 +21,10 @@ export default function InfoHorario({obj}){
                     {
                     array.showtimes.map((arr)=> 
                     
-                    <StyledLink to={`/assentos/${arr.id}`}>
-                    <ButtonTime key={arr.id}> {arr.name} </ButtonTime>
+                    <StyledLink to={`/assentos/${arr.id}`} onClick={() => setInfo2([...info2, array.weekday, array.date, arr.id, arr.name])}>
+
+                        <ButtonTime key={arr.id}> {arr.name} </ButtonTime>
+
                     </StyledLink>
 
                     )}
