@@ -1,17 +1,19 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import AssentosIndiv from './AssentosIndiv';
 
 
-export default function Assentos({footer2, setFooter2, info, setInfo, info2, setInfo2}){
+export default function Assentos({footer, setFooter, footer2, setFooter2, info, setInfo, info2, setInfo2}){
 
     const params = useParams();
     const [assentos, setAssentos] = useState(undefined)
     const [selecionados, setSelecionados] = useState([])
+    const [selecionados2, setSelecionados2] = useState([])
     const [name, setName] = useState([])
     const [cpf, setCpf] = useState([])
+    const navigate = useNavigate()
 
     useEffect (() =>{
 
@@ -28,14 +30,27 @@ export default function Assentos({footer2, setFooter2, info, setInfo, info2, set
 
         e.preventDefault();
         if (selecionados.length > 0){
-        const body = {
-            name,
-            cpf,
-            selecionados
-        }
-        console.log(body)
-        setName ("")
-        setCpf ("")
+
+            const body = {
+                ids: selecionados,
+                name,
+                cpf    
+            }
+            const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", body)
+
+            request.then(() => {
+
+                console.log(body)
+
+                setFooter(!footer)
+                setInfo2([...info2, body, selecionados2])
+
+                setName ("")
+                setCpf ("")
+
+                navigate("/sucesso")
+            })
+            
         } else alert("Acho que você esqueceu de selecionar um assento")
 
     }
@@ -55,6 +70,8 @@ export default function Assentos({footer2, setFooter2, info, setInfo, info2, set
                             id={arr.id}
                             selecionados={selecionados}
                             setSelecionados={setSelecionados}
+                            selecionados2={selecionados2}
+                            setSelecionados2={setSelecionados2}
                         /> )
                     
                 ):(
@@ -94,7 +111,7 @@ export default function Assentos({footer2, setFooter2, info, setInfo, info2, set
 
                 <ContainerButton>
 
-                    <button type='submit'>Clica clica</button>
+                    <button type='submit'>Reservar assento(s)</button>
 
                 </ContainerButton>
             </Formulario>

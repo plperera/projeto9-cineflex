@@ -36,14 +36,26 @@ export default function App () {
                                                             setInfo2={setInfo2}/>}/>
 
                 <Route path="/assentos/:sessaoId" element={<Assentos 
+                                                            footer={footer}
+                                                            setFooter={setFooter}
                                                             fotter2={footer2} 
                                                             setFooter2={setFooter2}
                                                             info={info} 
-                                                            setInfo={setInfo}/>}
+                                                            setInfo={setInfo}
                                                             info2={info2}
-                                                            setInfo2={setInfo2}/>
+                                                            setInfo2={setInfo2}/>}/>
 
-                <Route path="/sucesso" element={<Sucesso />}/>
+                <Route path="/sucesso" element={<Sucesso 
+                                                    info={info} 
+                                                    setInfo={setInfo}
+                                                    info2={info2}
+                                                    setInfo2={setInfo2}
+
+                                                    footer={footer}
+                                                    setFooter={setFooter}
+                                                    fotter2={footer2} 
+                                                    setFooter2={setFooter2}
+                                                    />}/>
                 
             </Routes>
             

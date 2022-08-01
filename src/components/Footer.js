@@ -27,7 +27,7 @@ const FooterComponent = styled.div`
     width: 100%;
     height: 117px;
 
-    display: ${(props) => props.display};
+    display: ${(props) => props.display} !important;
     flex-direction:row;
     align-items: center;
     justify-content: left;

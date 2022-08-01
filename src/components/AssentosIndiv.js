@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useState } from 'react';
 
 
-export default function AssentosIndiv({name, isAvailable, id, selecionados, setSelecionados}){
+export default function AssentosIndiv({name, isAvailable, id, selecionados, setSelecionados, selecionados2, setSelecionados2}){
   
     const [click, setClick] = useState(false)
 
@@ -18,9 +18,15 @@ export default function AssentosIndiv({name, isAvailable, id, selecionados, setS
     function clicou (id, name){
         setClick(!click)
  
-        if (selecionados.filter((arr) => arr === name).length !== 0){
-            setSelecionados(selecionados.filter((arr) => arr !== name))
-        } else if (isAvailable === true){setSelecionados([...selecionados, name])}
+        if (selecionados.filter((arr) => arr === id).length !== 0){
+            setSelecionados(selecionados.filter((arr) => arr !== id))
+            setSelecionados2(selecionados2.filter((arr) => arr !== name))
+        } else if (isAvailable === true){
+            setSelecionados([...selecionados, id])
+            setSelecionados2([...selecionados2, name])
+
+        }
+        else alert ("Esse assento não está disponível")
         
     }
     
