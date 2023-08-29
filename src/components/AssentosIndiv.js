@@ -33,17 +33,23 @@ export default function AssentosIndiv({seatData, setForm, form}){
 }
 
 const Card = styled.div`
-    font-size: 11px;
+    font-size: 13px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    width: 26px;
-    height: 26px; 
-    border-radius: 12px;
-    background-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#8DD7CF"):("#C3CFD9")):("#FBE192")};
-    border: 1px solid;
-    border-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#1AAE9E"):("#7B8B99")):("#F7C52B")};
+    width: 40px;
+    height: 40px; 
+    border-radius: 5px;
+    background-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#CE8210"):("#C9C9C983")):("#2B2B2B83")};
+    border: 3px solid;
+    border-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#BE6512"):("#C9C9C983")):("#2B2B2B83")};
     box-sizing: border-box;
     cursor: pointer;
+    user-select: none;
+    @media (max-width: 850px) {
+        width: 55px;
+        height: 55px; 
+        font-size: 16px;
+    }
 `

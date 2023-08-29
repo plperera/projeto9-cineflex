@@ -33,18 +33,26 @@ export default function Horario({allData, setAllData}){
     )
 }
 const Container = styled.div`
-
-    padding-top: 67px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
+    padding: 10vh 5vw;
+    row-gap: 4vh;
     h2 {
-    font-size: 24px;
-    margin: 40px 0;
-    color: #293845;
-}
-
+        width: 100%;
+        font-size: 32px;
+        font-weight: 600;
+        border-left: 8px solid #B91A1A; 
+        padding: 6px 0;
+        padding-left: 10px;
+    }
+    @media (max-width: 1280px) {
+        padding: 12vh 5vw;
+    }
+    @media (max-width: 850px) {
+        h2 {
+            font-size: 22px;
+        }
+    }
 `

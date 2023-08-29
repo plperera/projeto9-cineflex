@@ -43,27 +43,42 @@ const Container = styled.div`
     justify-content:center;
     margin-left: 24px;
     width:100%;
+    row-gap: 2vh;
+    padding-bottom: 4vh;
     h3{
-        font-size: 20px;
-        color: #293845;
+        font-size: 22px;
     }
-    div {
-        display:grid;
-        grid-template-columns: 1fr 1fr 4fr;
-        grid-column-gap: 12px;
-        margin: 6px 0 12px 0;
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        column-gap: 3vw;
+        row-gap: 2vh;
+        flex-wrap: wrap;
     }
 `
 const ButtonTime = styled.div`
-    width: 82px;
-    height: 43px;
-    background: #E8833A;
+    width: 120px;
+    height: 50px;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 700;
     color: #FFFFFF;
-    display: flex !important;
+    display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  #DA680B 0%, #FF9215 100% );
+    transition: background-position 0.3s;
+    background-size: 200% 200%;
+    background-position: right bottom;
+    :hover {
+        background-position: left top;
+    }
+    @media (max-width: 1280px) {
+        width: 100px;
+        height: 40px;
+        font-size: 18px;
+    }
 `
 const StyledLink = styled(Link)`
     text-decoration: none;

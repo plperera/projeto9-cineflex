@@ -6,7 +6,7 @@ export default function BannerFilme ({array, allData, setAllData}) {
         
         setAllData({...allData, selected: {
             ...selected, 
-            sessionName: movie?.title,
+            movieName: movie?.title,
             sessionOverview: movie?.overview,
             sessionImageUrl: movie?.posterURL,
             sessionId: movie?.id

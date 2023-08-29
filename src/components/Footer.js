@@ -12,60 +12,69 @@ export default function Footer({allData}){
     }, [location.pathname])
 
     return(
-        <FooterComponent display={locationPath === 'sessoes' || locationPath === 'filme' ? ('flex'):('none')}>
-            <Imagem><img src={allData?.selected?.imageUrl} alt=''/></Imagem> 
-            <div>
-                <p>{allData?.selected?.movieName}</p>
-                {allData?.selected?.sessionTime ? (<p>{allData?.selected?.day} - {allData?.selected?.sessionTime}</p>):(<></>)}
-            </div>
-            
-        </FooterComponent>
+        <AlignContainer>
+            <FooterComponent display={locationPath === 'sessoes' || locationPath === 'filme' || locationPath === 'assentos' ? ('flex'):('none')}>
+                <ImagemContainer><img src={allData?.selected?.sessionImageUrl} alt=''/></ImagemContainer> 
+                <div>
+                    <p>{allData?.selected?.movieName}</p>
+                    {allData?.selected?.sessionTime ? (<p>{allData?.selected?.sessionWeekday} - {allData?.selected?.sessionTime}</p>):(<></>)}
+                </div>
+                
+            </FooterComponent>
+        </AlignContainer>  
     )
 }
-const FooterComponent = styled.div`
-
-    background-color: #DFE6ED;
-    color: #293845;
-    font-size: 26px;
-    border: 1px solid #9EADBA;
-
-    width: 100%;
-    height: 117px;
-
-    display: ${(props) => props.display} !important;
-    flex-direction:row;
+const AlignContainer = styled.div`
+    display: flex;
     align-items: center;
-    justify-content: left;
-
+    justify-content: center;
+`
+const FooterComponent = styled.div`
+    font-size: 26px;
+    width: auto;
+    height: auto;
+    padding: 1vh .6vw;
+    border-radius: 10px;
+    display: ${(props) => props.display} !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     position:fixed;
-    bottom: 0;
-
-    
+    bottom: 1vh;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  #130647 0%, #1306472F 60% );
+    transition: background-position 0.3s;
+    background-size: 200% 200%;
+    background-position: right bottom;
+    backdrop-filter: blur(15px);
+    :hover {
+        background-position: left top;
+    }
     p {
-        height: 40px;
-        font-size: 26px;
-        color: #293845;
+        height: 50px;
+        font-size: 17px;
+        font-weight: 600;
+        text-align: left;
         margin-left: 14px;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+    @media (max-width: 850px) {
+        padding: 1.5vh 3vw;
+        width: 90%;
     }
 `
-const Imagem = styled.div`
-
+const ImagemContainer = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-
-    width: 64px;
-    height: 89px;
-
-    background-color: #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-
-    margin-left: 10px;
-
+    width: calc(48px * 1.4);
+    height: calc(72px * 1.4); 
     img {
-        width: 48px;
-        height: 72px;
-        
+        max-width: calc(48px * 1.4);
+        max-height: calc(72px * 1.4); 
+        border-radius: 5px;
+        object-fit: cover;
     }
 `

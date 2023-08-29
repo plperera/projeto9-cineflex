@@ -9,18 +9,15 @@ export default function Menu () {
 }
 
 const MenuComponent = styled.div`
-
-background-color: #C3CFD9;
-color: #E8833A;
-font-size: 34px;
-
-width: 100%;
-height: 67px;
-
-display: flex;
-align-items: center;
-justify-content: center;
-
-position:fixed;
-
+    background-color: #B91A1A;
+    font-size: 34px;
+    font-weight: 700;
+    width: 100%;
+    height: 67px;
+    letter-spacing: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    z-index: 1;
 `

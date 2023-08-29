@@ -21,55 +21,83 @@ export default function Home({allData, setAllData}){
 
             <h2>Selecione o filme</h2>
 
-            <Cards>
+            <BannersContainer>
                 {movies?.length > 0 ? (
 
                     <BannerFilme array={movies} allData={allData} setAllData={setAllData} />
 
-                ):(<div> Carregando...</div>)}
-            </Cards>
+                ):(<> Carregando...</>)}
+            </BannersContainer>
         </Container>
     )
 }
 
 const Container = styled.div`
-
-    padding-top: 67px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
-h2 {
-    font-size: 24px;
-    margin: 40px 0;
-}
-
+    padding: 10vh 5vw;
+    row-gap: 4vh;
+    h2 {
+        width: 100%;
+        font-size: 32px;
+        font-weight: 600;
+        border-left: 8px solid #B91A1A; 
+        padding: 6px 0;
+        padding-left: 10px;
+    }
+    @media (max-width: 1280px) {
+        padding: 12vh 5vw;
+    }
+    @media (max-width: 850px) {
+        padding: 12vh 5vw;
+        h2 {
+            font-size: 22px;
+        }
+    }
 `
-const Cards = styled.div`
-
-    display:grid;
-
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 30px;
-    grid-row-gap: 10px;
-
-img {
-    width: 129px;
-    height: 193px; 
-    object-fit: cover;
-}
-div {
-    width: 145px;
-    height: 209px;
-
-    background: #FFFFFF;
-    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-
+const BannersContainer = styled.div`
     display:flex;
-    align-items:center;
-    justify-content:center;
-}
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 6vh;
+    img {
+        max-width: calc(129px * 2.2);
+        max-height: calc(193px * 2.2);
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    div {
+        width: calc(129px * 2.2);
+        height: calc(193px * 2.2);
+        background-color: #150650;
+        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        :hover {
+          transform: translateY(-.8vh)  
+        }
+    }
+    @media (max-width: 1280px) {
+        img {
+            max-width: calc(129px * 2);
+            max-height: calc(193px * 2);
+        }
+        div {
+            width: calc(129px * 2);
+            height: calc(193px * 2);
+        }
+    }
+    @media (max-width: 850px) {
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 100%;
+        }
+        div {
+            width: 100%;
+        }
+    }
 `

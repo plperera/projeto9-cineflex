@@ -80,161 +80,179 @@ export default function Assentos({allData, setAllData}){
                 
             </ContainerAssentos> 
 
-            <Exemplo>
-                <Selecionado>
-                    <div></div>
+            <ExemploContainer>
+                <ExampleCard>
+                    <SeatCard isAvailable={true} isSelected={true} />
                     <h5>Selecionado</h5>
-                </Selecionado>
+                </ExampleCard>
 
-                <Disponivel>
-                    <div></div>
+                <ExampleCard>
+                    <SeatCard isAvailable={true} isSelected={false} />
                     <h5>Disponível</h5>
-                </Disponivel>
+                </ExampleCard>
 
-                <Indisponivel>
-                    <div></div>
+                <ExampleCard>
+                    <SeatCard isAvailable={false} isSelected={false} />
                     <h5>Indisponível</h5>
-                </Indisponivel>
-            </Exemplo>
+                </ExampleCard>
+            </ExemploContainer>
             
             <Formulario onSubmit={ handleForm }>
                 
                 <div>
-                    <p>Nome do comprador:</p>
+                    <label>Nome do comprador:</label>
                     <input onChange={CustomHandleForm} value={form?.name} name={'name'} required ></input>
                 </div>
 
                 <div>
-                    <p>CPF do comprador:</p>
+                    <label>CPF do comprador:</label>
                     <input onChange={CustomHandleForm} value={form?.cpf} name={'cpf'} required ></input>
                 </div>
 
                 <ContainerButton>
-
                     <button type='submit'>Reservar assento(s)</button>
-
                 </ContainerButton>
             </Formulario>
-
-            
+ 
         </Container>
     )
 }
 const Container = styled.div`
-
-    padding-top: 67px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
+    padding: 10vh 5vw;
+    row-gap: 5vh;
     h2 {
-    font-size: 24px;
-    margin: 40px 0;
-    color: #293845;
-}
+        width: 100%;
+        font-size: 32px;
+        font-weight: 600;
+        border-left: 8px solid #B91A1A; 
+        padding: 6px 0;
+        padding-left: 10px;
+    }
+    @media (max-width: 1280px) {
+        padding: 12vh 5vw;
+    }
+    @media (max-width: 850px) {
+        h2 {
+            font-size: 22px;
+        }
+        padding-bottom: 18vh;
+    }
 `
 const ContainerAssentos = styled.div`
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 7px;
-    grid-row-gap: 15px;   
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 50%;  
+    row-gap: 1vh;
+    column-gap: 1vw;
+    @media (max-width: 850px) {
+        width: 95%;
+        row-gap: 1.5vh;
+        column-gap: 3vw;
+    }
 `
-const Selecionado = styled.div`
-    background: #8DD7CF;
-    border: 1px solid #1AAE9E;
+const ExemploContainer = styled.div`
     display:flex;
     align-items:center;
-    justify-content:space-evenly;
+    justify-content:space-between;
+    width: 50%;
+    @media (max-width: 850px) {
+        width: 95%;
+    }
 `
-const Disponivel = styled.div`
-    background: #C3CFD9;
-    border: 1px solid #7B8B99;
-    display:flex;
-    align-items:center;
-    justify-content:space-evenly;
-`
-const Indisponivel = styled.div`
-    background: #FBE192;
-    border: 1px solid #F7C52B;
-    display:flex;
-    align-items:center;
-    justify-content:space-evenly;
-`
-const Exemplo = styled.div`
-
-    display:flex;
-    align-items:center;
-    justify-content:space-evenly;
-
-    width:100%;
-    margin-top:25px;
-
+const ExampleCard = styled.div`
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 1vh;
     h5{
         font-size: 13px;
-        color: #4E5A65;
-        margin-top: 60px;
-    }
-
-    div{
-        box-sizing: border-box;
-        border-radius: 17px;
-
-        width: 24px;
-        height: 24px;
+        color: #9E9E9E;
     }
 `
-const Formulario = styled.form`
-
+const SeatCard = styled.div`
+    font-size: 13px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
-    margin-top: 50px;
-
-    width: 100%;
-
-    p {
-        font-size: 18px;
-        color: #293845;  
+    width: 40px;
+    height: 40px; 
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 3px solid;
+    background-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#CE8210"):("#C9C9C983")):("#2B2B2B83")};
+    border-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#BE6512"):("#C9C9C983")):("#2B2B2B83")}; 
+`
+const Formulario = styled.form`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width: 50%;
+    label {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        font-size: 21px;
+        color: rgb(255, 255, 255);
+        padding-left: 16px; 
     }
     input {   
-        box-sizing: border-box; 
-        width: 85%;
-        height: 51px;
-
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
-        border-radius: 3px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        background: none;
+        border: 1px solid #FFFFFF;
+        color: #FFFFFF;
+        font-size: 19px;
+        padding: 16px 16px;
+        border-radius: 4px;
+        margin-top: 8px;
+        margin-bottom: 23px;
     }
     div {
         width:100%;
         margin-left: 24px;
     }
-
-
+    @media (max-width: 850px) {
+        width: 95%;
+        div {
+            margin-left: 0;
+        }
+    }
 `
 const ContainerButton = styled.div`
-
-    margin-top:57px;
-
+    margin-top: 30px;
     display:flex;
     justify-content:center;
     align-items:center;
-
     button {
-        width: 225px;
-        height: 42px;
-
-        background: #E8833A;
-        border-radius: 3px;
-
-        font-size: 18px;
-        color: #FFFFFF;
+        color: #ffffff;
+        padding: 14px 16px;
+        font-size: 25px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none; 
+        transform: translateZ(0);
+        width: 100%;
+        font-weight: 700;
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  #DA680B 0%, #FF9215 100% );
+        transition: background-position 0.3s;
+        background-size: 200% 200%;
+        background-position: right bottom;
+        :hover {
+            background-position: left top;
+            transform: translateY(-.2vh);
+        }
     }
 `
