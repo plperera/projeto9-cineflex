@@ -8,70 +8,30 @@ import Sucesso from "./Sucesso"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
-
 export default function App () {
 
-    const [footer, setFooter] = useState(false)
-    const [footer2, setFooter2] = useState(false)
-    const [info, setInfo] = useState([])
-    const [info2, setInfo2] = useState([])
+    const [allData, setAllData] = useState({})
 
-    console.log(info2)
+    useEffect(() => {
+        console.log("allData", allData)
+    }, [allData])
+
     return (
         <>
-        <BrowserRouter>
+            <BrowserRouter>
 
-            <Menu /> 
+                <Menu /> 
 
-            <Routes>
+                <Routes>
+                    <Route path="/" element={<Home setAllData={setAllData} allData={allData}/>}/>
+                    <Route path="/sessoes/:filmeId" element={<Horario setAllData={setAllData} allData={allData}/>}/>
+                    <Route path="/assentos/:sessaoId" element={<Assentos setAllData={setAllData} allData={allData} />}/>
+                    <Route path="/sucesso" element={<Sucesso setAllData={setAllData} allData={allData} />}/>                
+                </Routes>
 
-                <Route path="/" element={<Home footer={footer} setFooter={setFooter} />}/>
-
-                <Route path="/sessoes/:filmeId" element={<Horario 
-                                                            footer={footer} 
-                                                            setFooter={setFooter} 
-                                                            info={info} 
-                                                            info2={info2} 
-                                                            setInfo={setInfo}
-                                                            setInfo2={setInfo2}/>}/>
-
-                <Route path="/assentos/:sessaoId" element={<Assentos 
-                                                            footer={footer}
-                                                            setFooter={setFooter}
-                                                            fotter2={footer2} 
-                                                            setFooter2={setFooter2}
-                                                            info={info} 
-                                                            setInfo={setInfo}
-                                                            info2={info2}
-                                                            setInfo2={setInfo2}/>}/>
-
-                <Route path="/sucesso" element={<Sucesso 
-                                                    info={info} 
-                                                    setInfo={setInfo}
-                                                    info2={info2}
-                                                    setInfo2={setInfo2}
-
-                                                    footer={footer}
-                                                    setFooter={setFooter}
-                                                    fotter2={footer2} 
-                                                    setFooter2={setFooter2}
-                                                    />}/>
+                <Footer allData={allData}/>
                 
-            </Routes>
-            
-
-            <Footer 
-            footer={footer} 
-            setFooter={setFooter}
-            footer2={footer2} 
-            setFooter2={setFooter2}
-            info={info} 
-            setInfo={setInfo}
-            info2={info2} 
-            setInfo2={setInfo2}
-            />
-
-        </BrowserRouter>
+            </BrowserRouter>
         </>
     )
 }

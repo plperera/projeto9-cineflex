@@ -1,56 +1,59 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import AssentosIndiv from './AssentosIndiv';
 
 
-export default function Assentos({footer, setFooter, footer2, setFooter2, info, setInfo, info2, setInfo2}){
+export default function Assentos({allData, setAllData}){
 
     const params = useParams();
-    const [assentos, setAssentos] = useState(undefined)
-    const [selecionados, setSelecionados] = useState([])
-    const [selecionados2, setSelecionados2] = useState([])
-    const [name, setName] = useState([])
-    const [cpf, setCpf] = useState([])
+    const [form, setForm] = useState(undefined)
+    const [ sessionData, setSessionData] = useState(undefined)
+
+    function CustomHandleForm ({target: {value, name}}) {
+        setForm({...form, [name]: value})
+    }
+
+    useEffect(() => {
+        console.log("form", form)
+    }, [form])
+
     const navigate = useNavigate()
 
     useEffect (() =>{
-
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${params.sessaoId}/seats`)
-        promise.then( request => setAssentos(request.data))
-
-        setFooter2(!footer2)
-
+        promise.then( request => setSessionData(request.data))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log(assentos) 
-
     function handleForm(e) {
-
         e.preventDefault();
-        if (selecionados.length > 0){
-
+        if (form?.seats?.length > 0){
             const body = {
-                ids: selecionados,
-                name,
-                cpf    
+                ids: form?.seats?.map( e => e.id),
+                name: form?.name,
+                cpf: form?.cpf
             }
+            console.log(body)
+
             const request = axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many", body)
 
             request.then(() => {
-
-                console.log(body)
-
-                setFooter(!footer)
-                setInfo2([...info2, body, selecionados2])
-
-                setName ("")
-                setCpf ("")
+                const { selected } = allData
+                setAllData({...allData, 
+                    selected: {
+                    ...selected,
+                    sessionSeats: form?.seats
+                    },
+                    buyer: {
+                        name: form?.name,
+                        cpf: form?.cpf
+                    }
+                })
 
                 navigate("/sucesso")
             })
-            
         } else alert("Acho que você esqueceu de selecionar um assento")
 
     }
@@ -62,21 +65,18 @@ export default function Assentos({footer, setFooter, footer2, setFooter2, info, 
             
             <ContainerAssentos>
 
-                {assentos ? (
+                {sessionData ? (
                     
-                    assentos.seats.map((arr) => <AssentosIndiv 
-                            name={arr.name} 
-                            isAvailable={arr.isAvailable} 
-                            id={arr.id}
-                            selecionados={selecionados}
-                            setSelecionados={setSelecionados}
-                            selecionados2={selecionados2}
-                            setSelecionados2={setSelecionados2}
-                        /> )
+                    sessionData.seats.map((e) => 
+                        <AssentosIndiv 
+                            seatData={e} 
+                            setForm={setForm}
+                            form={form}
+                            key={e?.id}
+                        />
+                    )
                     
-                ):(
-                    <>Carregando...</>
-                )}
+                ):(<>Carregando...</>)}
                 
             </ContainerAssentos> 
 
@@ -101,12 +101,12 @@ export default function Assentos({footer, setFooter, footer2, setFooter2, info, 
                 
                 <div>
                     <p>Nome do comprador:</p>
-                    <input onChange={(e) => setName(e.target.value)} value = {name} required></input>
+                    <input onChange={CustomHandleForm} value={form?.name} name={'name'} required ></input>
                 </div>
 
                 <div>
                     <p>CPF do comprador:</p>
-                    <input onChange={(e) => setCpf(e.target.value)} value = {cpf} required></input>
+                    <input onChange={CustomHandleForm} value={form?.cpf} name={'cpf'} required ></input>
                 </div>
 
                 <ContainerButton>

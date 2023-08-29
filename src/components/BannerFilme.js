@@ -1,17 +1,25 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-export default function BannerFilme ({array}) {
+export default function BannerFilme ({array, allData, setAllData}) {
+
+    function handleSelected(movie){
+        const { selected } = allData
+        
+        setAllData({...allData, selected: {
+            ...selected, 
+            sessionName: movie?.title,
+            sessionOverview: movie?.overview,
+            sessionImageUrl: movie?.posterURL,
+            sessionId: movie?.id
+        }})
+    }
 
     return (
             
-            array.map((array, indice) => 
+            array.map((e) => 
 
-                <Link to={`/sessoes/${array.id}`}>
+                <Link to={`/sessoes/${e.id}`} onClick={() => handleSelected(e)} >
                     <div>
-                        <img 
-                        src = {array.posterURL} 
-                        key={array.id} 
-                        />                       
+                        <img src={e?.posterURL} key={e.id} alt=''/>                       
                     </div>
                 </Link>
 

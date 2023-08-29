@@ -1,25 +1,14 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import BannerFilme from './BannerFilme'
-
-export default function Sucesso({info, setInfo, info2, setInfo2, footer2, setFooter2}){
-
-    console.log("sucesso")
-    console.log(info)
-    console.log(info2)
+export default function Sucesso({allData, setAllData}){
 
     const navigate = useNavigate()
 
-    function reset (){
-        
-        setInfo("")
-        setInfo2("")
-        setFooter2(!footer2)
-
+    function reset (){  
+        setAllData({})
         navigate("/")
     }
-
    
     return(
 
@@ -29,21 +18,21 @@ export default function Sucesso({info, setInfo, info2, setInfo2, footer2, setFoo
 
             <div>
                 <h3>Filme e sessão</h3>
-                <p>{info[0]}</p>
-                <p>{info2[1]} {info2[3]}</p>
+                <p>{allData?.selected?.movieName}</p>
+                <p>{allData?.selected?.sessionDate} {allData?.selected?.sessionTime}</p>
             </div>
 
             <div>
                 <h3>Ingressos</h3>
-                {info2[5].map((arr) => (
-                    <p>Assento {arr}</p>
-                    ))}
+                {allData?.selected?.sessionSeats?.map((arr) => (
+                    <p>Assento {arr?.name}</p>
+                ))}
             </div>
 
             <div>
                 <h3>Comprador</h3>
-                <p>Nome: {info2[4].name}</p>
-                <p>CPF: {info2[4].cpf}</p>
+                <p>Nome: {allData?.buyer?.name}</p>
+                <p>CPF: {allData?.buyer?.cpf}</p>
             </div>
 
             <ContainerButton>

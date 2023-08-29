@@ -1,17 +1,22 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components"
-import { useState } from 'react'
 
-export default function Footer({footer, setFooter, footer2, setFooter2, info, setInfo, info2, setInfo2}){
+export default function Footer({allData}){
 
-    let display = footer ? ("flex"):("none")
+    const [locationPath, setLocationPath] = useState(undefined)
+    const location = useLocation();
 
+    useEffect(() => { 
+        setLocationPath(location?.pathname?.split("/")[1] || undefined)
+    }, [location.pathname])
 
     return(
-        <FooterComponent display={display}>
-            <Imagem><img src={info[1]}/></Imagem> 
+        <FooterComponent display={locationPath === 'sessoes' || locationPath === 'filme' ? ('flex'):('none')}>
+            <Imagem><img src={allData?.selected?.imageUrl} alt=''/></Imagem> 
             <div>
-                <p>{info[0]}</p>
-                {footer2 ? (<p>{info2[0]} - {info2[3]}</p>):("")}
+                <p>{allData?.selected?.movieName}</p>
+                {allData?.selected?.sessionTime ? (<p>{allData?.selected?.day} - {allData?.selected?.sessionTime}</p>):(<></>)}
             </div>
             
         </FooterComponent>

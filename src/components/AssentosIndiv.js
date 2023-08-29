@@ -1,63 +1,49 @@
 import styled from 'styled-components'
-import { useState } from 'react';
 
+export default function AssentosIndiv({seatData, setForm, form}){
 
-export default function AssentosIndiv({name, isAvailable, id, selecionados, setSelecionados, selecionados2, setSelecionados2}){
-  
-    const [click, setClick] = useState(false)
-
-    function verificaColor (){
-        if (isAvailable === true && click === false) return "#C3CFD9"
-        else if (isAvailable === true && click === true) return "#8DD7CF"
-    }
-    
-    function verificaBorder (){
-        if (isAvailable === true && click === false) return "#B8B99"
-        else if (isAvailable === true && click === true) return "#1AAE9E"
-    }
-    function clicou (id, name){
-        setClick(!click)
+    function handleClick() {
+        const { seats = [] } = form || {};
  
-        if (selecionados.filter((arr) => arr === id).length !== 0){
-            setSelecionados(selecionados.filter((arr) => arr !== id))
-            setSelecionados2(selecionados2.filter((arr) => arr !== name))
-        } else if (isAvailable === true){
-            setSelecionados([...selecionados, id])
-            setSelecionados2([...selecionados2, name])
+        let updatedSeats;
 
+        const seatsWithoutCurrent = seats.filter(e => e.name !== seatData?.name);
+    
+        if (seatsWithoutCurrent.length !== seats.length) {
+            updatedSeats = seatsWithoutCurrent;
+        } else {
+            updatedSeats = [...seats, { id: seatData?.id, name: seatData?.name }];
         }
-        else alert ("Esse assento não está disponível")
-        
+    
+        setForm(prevForm => ({
+            ...prevForm,
+            seats: updatedSeats
+        }));
     }
     
-    return(            
-        <>        
-            <Card 
-
-                key = {id} 
-                color = {isAvailable ? (verificaColor(isAvailable,click)):("#FBE192")}
-                borderColor= {isAvailable ? (verificaBorder(isAvailable,click)):("#FBE192")}
-                onClick={ () => clicou(id, name)}
-                    
-            >{name}</Card>
-        </> 
+    return(                  
+        <Card 
+            isAvailable={seatData?.isAvailable}
+            isSelected={form?.seats?.some( e => e?.name === seatData?.name) && seatData?.isAvailable}
+            onClick={ () => handleClick()}                    
+        >
+            {seatData?.name}
+        </Card>         
     )
 }
 
 const Card = styled.div`
     font-size: 11px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
     width: 26px;
     height: 26px; 
     border-radius: 12px;
-
-    background-color: ${(props) => props.color};
-    border: 1px solid ${(props) => props.borderColor};
-
+    background-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#8DD7CF"):("#C3CFD9")):("#FBE192")};
+    border: 1px solid;
+    border-color: ${(props) => props.isAvailable ? (props.isSelected ? ("#1AAE9E"):("#7B8B99")):("#F7C52B")};
     box-sizing: border-box;
+    cursor: pointer;
 `

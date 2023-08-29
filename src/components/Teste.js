@@ -7,12 +7,11 @@ export default function Teste({children, color}){
 }
 
 const ButtonTeste = styled.div`
-width: 100px;
-height: 100px;
-background-color: ${(props) => props.color};
-
-display:flex;
-align-items:center;
-justify-content:center;
-color: white;
+    width: 100px;
+    height: 100px;
+    background-color: ${(props) => props.color};
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: white;
 `

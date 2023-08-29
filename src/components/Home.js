@@ -1,41 +1,33 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import BannerFilme from './BannerFilme'
 
-export default function Home(){
+export default function Home({allData, setAllData}){
 
-    const [filmes, setFilmes] = useState([])
+    const [movies, setMovies] = useState(undefined)
  
     useEffect (() =>{
 
         const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies")
-        promise.then( request => setFilmes(request.data))        
+        promise.then( request => setMovies(request?.data) )        
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return(
-
-        <Container>     
+        <Container>   
 
             <h2>Selecione o filme</h2>
 
             <Cards>
+                {movies?.length > 0 ? (
 
-                {filmes.length > 0 ? (
+                    <BannerFilme array={movies} allData={allData} setAllData={setAllData} />
 
-                    <BannerFilme array= {filmes}/>
-
-                ):(
-                    <div> Carregando...</div>
-                )}
-                
-
+                ):(<div> Carregando...</div>)}
             </Cards>
-           
-
         </Container>
     )
 }
